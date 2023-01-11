@@ -12,6 +12,17 @@
 
 #include "so_long.h"
 
+void	ft_swap_and_free(t_data *data, char *line)
+{
+	char	*aux;
+
+	aux = ft_strdup(data->map);
+	free(data->map);
+	data->map = ft_strjoin(aux, line);
+	free(aux);
+	free(line);
+}
+
 int	check_exit(t_data *data, char next_position)
 {
 	if (next_position == 'E' && data->nbr_collect != 0)

@@ -27,11 +27,11 @@ static void	ft_check_inside_wall(t_data *data)
 			data->nbr_players++;
 		else if (data->map[i] != '1' && data->map[i] != '0'
 			&& data->map[i] != '\n')
-			ft_free_map_data(data); //print_error
+			ft_free_map_data(data, 4);
 	}
 	if (data->nbr_collect < 1 || data->nbr_exits < 1
 		|| data->nbr_players != 1)
-		ft_free_map_data(data); //print_error
+		ft_free_map_data(data, 5);
 }
 
 static void	ft_check_vertical_wall(t_data *data, int len)
@@ -44,7 +44,7 @@ static void	ft_check_vertical_wall(t_data *data, int len)
 		if (data->map[i] == '1')
 			i += data->map_width;
 		else
-			ft_free_map_data(data); //print_error
+			ft_free_map_data(data, 3);
 	}
 	i = data->map_width - 2;
 	while (i < len)
@@ -52,7 +52,7 @@ static void	ft_check_vertical_wall(t_data *data, int len)
 		if (data->map[i] == '1')
 			i += data->map_width;
 		else
-			ft_free_map_data(data); //print_error
+			ft_free_map_data(data, 3);
 	}
 }
 
@@ -68,12 +68,12 @@ static void	ft_check_wall(t_data *data)
 	while (++i != data->map_width)
 	{
 		if (data->map[i] != '1' && data->map[i] != '\n')
-			ft_free_map_data(data); //print_error
+			ft_free_map_data(data, 3);
 	}
 	while (++last_idx != len)
 	{
 		if (data->map[i] != '1' && data->map[i] != '\n')
-			ft_free_map_data(data); //print_error
+			ft_free_map_data(data, 3);
 	}
 	ft_check_vertical_wall(data, len);
 }
@@ -97,23 +97,22 @@ void	ft_check_map(t_data *data, char *map_name)
 	int		fd;
 	int		control;
 
-	fd = open(map_name, O_RDONLY); //Comprobar modo bien escrito
+	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
-		ft_free_data(data);
+		ft_free_map_data(data, 1);
 	control = 2;
 	while (control != 1)
 	{
 		data->map_height++;
 		line = get_next_line(fd);
 		if (!line)
-			break ;//ft_free_map_and_close(data, fd);
+			break ;
 		if (control == 2)
 			data->map_width = ft_strlen(line);
 		ft_search_eol(line, &control);
 		if ((int) ft_strlen(line) + control != data->map_width)
-			ft_free_map_and_close(data, fd);
-		data->map = ft_strjoin(data->map, line);
-		free(line);
+			ft_free_map_and_close(data, fd, 2);
+		ft_swap_and_free(data, line);
 	}
 	close(fd);
 	ft_check_wall(data);

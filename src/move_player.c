@@ -14,8 +14,8 @@
 
 static void	move_up(t_data *data)
 {
-	int	i;
-	int	up;
+	int		i;
+	int		up;
 	char	*moves;
 
 	i = 0;
@@ -39,8 +39,8 @@ static void	move_up(t_data *data)
 
 static void	move_left(t_data *data)
 {
-	int	i;
-	int	left;
+	int		i;
+	int		left;
 	char	*moves;
 
 	i = 0;
@@ -64,8 +64,8 @@ static void	move_left(t_data *data)
 
 static void	move_down(t_data *data)
 {
-	int	i;
-	int	down;
+	int		i;
+	int		down;
 	char	*moves;
 
 	i = 0;
@@ -89,8 +89,8 @@ static void	move_down(t_data *data)
 
 static void	move_right(t_data *data)
 {
-	int	i;
-	int	right;
+	int		i;
+	int		right;
 	char	*moves;
 
 	i = 0;
