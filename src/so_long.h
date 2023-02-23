@@ -27,8 +27,10 @@ typedef struct s_data
 	mlx_image_t	*collect_img;
 	mlx_image_t	*exit_img;
 	char		*map;
+	char		*map_copy;
 	int			map_height;
 	int			map_width;
+	int			player_pos;
 	int			nbr_collect;
 	int			nbr_players;
 	int			nbr_exits;
@@ -41,11 +43,14 @@ void	ft_delete_images(t_data *data);
 void	ft_print_map(t_data *data, int img_size);
 void	press_key(mlx_key_data_t keydata, void *data);
 int		check_exit(t_data *data, char next_position);
-void	ft_free_map_and_close(t_data *data, int fd, int error_number);
+void	free_map_and_close(t_data *data, int fd, char *line, int error_number);
 void	ft_free_data(t_data *data, int error_number);
 void	ft_free_map_data(t_data *data, int error_number);
 void	ft_free_all(t_data *data);
 void	ft_swap_and_free(t_data *data, char *line);
 void	ft_print_error(int error_number);
+int		path_finding(t_data *data, int player_pos, int objetive, char object);
+void	set_player_position_and_map_copy(t_data *data);
+void	check_path(t_data *data, int pos, char object);
 
 #endif

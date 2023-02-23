@@ -6,7 +6,7 @@
 /*   By: jdomingu <jdomingu@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 20:07:09 by jdomingu          #+#    #+#             */
-/*   Updated: 2023/01/02 20:09:57 by jdomingu         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:15:34 by jdomingu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int argc, char **argv)
 		ft_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	ft_putendl_fd("Invalid number of arguments.", 1);
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd("Invalid number of arguments.", 2);
 	exit(EXIT_FAILURE);
 }

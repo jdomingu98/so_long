@@ -6,7 +6,7 @@
 /*   By: jdomingu <jdomingu@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:09:43 by jdomingu          #+#    #+#             */
-/*   Updated: 2023/01/02 20:09:46 by jdomingu         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:43:21 by jdomingu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,27 @@ static void	ft_check_inside_wall(t_data *data)
 	int	i;
 
 	i = -1;
+	set_player_position_and_map_copy(data);
 	while (data->map[++i])
 	{
-		if (data->map[i] == 'C')
-			data->nbr_collect++;
-		else if (data->map[i] == 'E')
-			data->nbr_exits++;
+		if (data->map[i] == 'C' || data->map[i] == 'E')
+		{
+			if (data->map[i] == 'C')
+				data->nbr_collect++;
+			else
+				data->nbr_exits++;
+			check_path(data, i, data->map[i]);
+		}
 		else if (data->map[i] == 'P')
 			data->nbr_players++;
 		else if (data->map[i] != '1' && data->map[i] != '0'
 			&& data->map[i] != '\n')
 			ft_free_map_data(data, 4);
 	}
-	if (data->nbr_collect < 1 || data->nbr_exits < 1
+	if (data->nbr_collect < 1 || data->nbr_exits != 1
 		|| data->nbr_players != 1)
 		ft_free_map_data(data, 5);
+	free(data->map_copy);
 }
 
 static void	ft_check_vertical_wall(t_data *data, int len)
@@ -111,7 +117,7 @@ void	ft_check_map(t_data *data, char *map_name)
 			data->map_width = ft_strlen(line);
 		ft_search_eol(line, &control);
 		if ((int) ft_strlen(line) + control != data->map_width)
-			ft_free_map_and_close(data, fd, 2);
+			free_map_and_close(data, fd, line, 2);
 		ft_swap_and_free(data, line);
 	}
 	close(fd);
