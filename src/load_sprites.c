@@ -25,19 +25,19 @@ void	init_sprites(t_data *data)
 {
 	mlx_texture_t	*sprite_texture;
 
-	sprite_texture = mlx_load_png("./assets/images/wall.png");
+	sprite_texture = mlx_load_png("./assets/textures/wall.png");
 	data->wall_img = mlx_texture_to_image(data->mlx, sprite_texture);
 	mlx_delete_texture(sprite_texture);
-	sprite_texture = mlx_load_png("./assets/images/background.png");
+	sprite_texture = mlx_load_png("./assets/textures/background.png");
 	data->bg_img = mlx_texture_to_image(data->mlx, sprite_texture);
 	mlx_delete_texture(sprite_texture);
-	sprite_texture = mlx_load_png("./assets/images/collectable.png");
+	sprite_texture = mlx_load_png("./assets/textures/collectable.png");
 	data->collect_img = mlx_texture_to_image(data->mlx, sprite_texture);
 	mlx_delete_texture(sprite_texture);
-	sprite_texture = mlx_load_png("./assets/images/exit.png");
+	sprite_texture = mlx_load_png("./assets/textures/exit.png");
 	data->exit_img = mlx_texture_to_image(data->mlx, sprite_texture);
 	mlx_delete_texture(sprite_texture);
-	sprite_texture = mlx_load_png("./assets/images/player_front.png");
+	sprite_texture = mlx_load_png("./assets/textures/player_front.png");
 	data->player_img = mlx_texture_to_image(data->mlx, sprite_texture);
 	mlx_delete_texture(sprite_texture);
 }
